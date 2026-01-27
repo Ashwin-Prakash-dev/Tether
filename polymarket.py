@@ -29,11 +29,11 @@ def fetch_whale_buys(
     for row in rows:
         ts = row.get("timestamp")
         try:
-            ts_int = int(ts)
+            ts_int = int(float((ts)))
         except Exception:
-            ts_int = 0
+            ts_int = None
 
-        if ts_int and ts_int < since:
+        if ts_int is not None and ts_int < since:
             continue
 
         trade_id = str(row.get("transactionHash") or row.get("id") or "")
