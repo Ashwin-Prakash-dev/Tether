@@ -1,7 +1,7 @@
 import os
 import redis
 
-REDIS_URL = os.getenv("rediss://default:********@fitting-fawn-21199.upstash.io:6379")
+REDIS_URL = os.getenv("REDIS_URL")
 
 
 def get_redis() -> "redis.Redis":
