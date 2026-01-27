@@ -6,7 +6,7 @@ DATA_API_TRADES = "https://data-api.polymarket.com/trades"
 
 def fetch_whale_buys(
     min_cash_usd: float = 100_000,
-    lookback_seconds: int = 300,
+    lookback_seconds: int = 3600,
     limit: int = 200,
 ) -> list[dict]:
 
