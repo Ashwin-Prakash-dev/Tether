@@ -7,7 +7,7 @@ from state import get_redis, is_seen, mark_seen
 app = FastAPI(title="Polymarket Whale Alerts")
 
 MIN_CASH_USD = 100_000
-LOOKBACK_SECONDS = 300          
+LOOKBACK_SECONDS = 3600          
 SEEN_TTL_SECONDS = 7 * 24 * 3600
 LIMIT = 200
 
