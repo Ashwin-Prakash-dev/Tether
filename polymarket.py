@@ -16,10 +16,12 @@ def fetch_whale_buys(
     params = {
         "side": "BUY",
         "filterType": "CASH",
-        "filterAmount": min_cash_usd,
+        "filterAmount": str(int(min_cash_usd)),
         "limit": limit,
         "offset": 0,
     }
+
+    print("Polymarket params:", params)
 
     r = requests.get(DATA_API_TRADES, params=params, timeout=15)
     r.raise_for_status()
