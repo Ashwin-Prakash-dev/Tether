@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from alerts import push_send, format_whale_alert
 from polymarket import fetch_whale_buys
 from state import get_redis, is_seen, mark_seen
+from polymarket import fetch_whale_buys
 
 app = FastAPI(title="Polymarket Whale Alerts")
 
@@ -10,6 +11,18 @@ MIN_CASH_USD = 100_000
 LOOKBACK_SECONDS = 3600          
 SEEN_TTL_SECONDS = 7 * 24 * 3600
 LIMIT = 200
+
+@app.get("/debug")
+def debug():
+    trades = fetch_whale_buys(min_cash_usd=MIN_CASH_USD, lookback_seconds=LOOKBACK_SECONDS, limit=LIMIT)
+    sample = trades[:3]
+    return {
+        "lookback_seconds": LOOKBACK_SECONDS,
+        "min_cash_usd": MIN_CASH_USD,
+        "limit": LIMIT,
+        "fetched_count": len(trades),
+        "sample": sample,
+    }
 
 
 @app.get("/health")
