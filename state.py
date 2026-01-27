@@ -1,7 +1,7 @@
 import os
 import redis
 
-REDIS_URL = os.getenv("https://fitting-fawn-21199.upstash.io")
+REDIS_URL = os.getenv("rediss://default:********@fitting-fawn-21199.upstash.io:6379")
 
 
 def get_redis() -> "redis.Redis":
@@ -19,5 +19,4 @@ def is_seen(r: "redis.Redis", trade_id: str) -> bool:
 
 
 def mark_seen(r: "redis.Redis", trade_id: str, ttl_seconds: int) -> None:
-    # Mark first to prevent duplicate alerts if overlapping cron hits occur.
     r.set(seen_key(trade_id), "1", ex=ttl_seconds)
